@@ -10,7 +10,7 @@ public class Exercisei1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        walker = new introMover();
+        walker = new exerciseOneMover();
     }
 
     // Update is called once per frame
@@ -18,6 +18,15 @@ public class Exercisei1 : MonoBehaviour
     {        //Have the walker choose a direction
         walker.step();
         walker.CheckEdges();
+        draw();
+    }
+    public void draw()
+    {
+        //This creates a sphere GameObject
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //This sets our ink "sphere game objects" at the position of the Walker GameObject (walker) at the current frame
+        //to draw the path
+        sphere.transform.position = new Vector3(walker.mover.transform.position.x, walker.mover.transform.position.y, 0F);
     }
 }
 
@@ -47,17 +56,17 @@ public class exerciseOneMover
         location = mover.transform.position;
         //Each frame choose a new Random number 0,1,2,3, 
         //If the number is equal to one of those values, take a step
-        int choice = Random.Range(0, 4);
-        if (choice == 0)
+        int choice = Random.Range(0, 10);
+        if (choice <= 3)
         {
             location.x++;
 
         }
-        else if (choice == 1)
+        else if (choice == 4)
         {
             location.x--;
         }
-        else if (choice == 3)
+        else if (choice == 5)
         {
             location.y++;
         }
@@ -100,4 +109,5 @@ public class exerciseOneMover
         minimumPos = Camera.main.ScreenToWorldPoint(Vector2.zero);
         maximumPos = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
+    
 }
