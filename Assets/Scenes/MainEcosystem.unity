@@ -214,6 +214,94 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &671680338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 671680340}
+  - component: {fileID: 671680339}
+  - component: {fileID: 671680341}
+  m_Layer: 0
+  m_Name: EcosystermController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &671680339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671680338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed34ee2c6e55c740abf770de8398b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chapterOneCreatures: []
+  chapterOneCreature: {fileID: 1096138241578298797, guid: f57b4d13decf6dd46bd0acf991e1d2b2,
+    type: 3}
+  chapterOneCreaturePopulation: 20
+  chapterTwoCreatures: []
+  chapterTwoCreature: {fileID: 0}
+  chapterTwoCreaturePopulation: 0
+  chapterThreeCreatures: []
+  chapterThreeCreature: {fileID: 0}
+  chapterThreeCreaturePopulation: 0
+  chapterSixCreatures: []
+  chapterSixCreature: {fileID: 0}
+  chapterSixCreaturePopulation: 0
+  chapterSevenCreatures: []
+  chapterSevenCreature: {fileID: 0}
+  chapterSevenCreaturePopulation: 0
+  chapterEightCreatures: []
+  chapterEightCreature: {fileID: 0}
+  chapterEightCreaturePopulation: 0
+  terrainMin: 10
+  terrain: {fileID: 671680341}
+--- !u!4 &671680340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671680338}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &671680341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671680338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72de3f84c81b9aa4dbeb3db94a4eaca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainCube: {fileID: 86106462}
+  columns: 20
+  rows: 20
+  thetaInput: 10
+  rotationThetaInput: 1
+  color1: {r: 0, g: 0.0489456, b: 0.254717, a: 0}
+  color2: {r: 0, g: 0.1250832, b: 0.6509434, a: 0}
+  color3: {r: 0, g: 0.19215688, b: 1, a: 0}
+  color4: {r: 0.24056602, g: 0.38649642, b: 1, a: 0}
+  color5: {r: 0.5235849, g: 0.6151313, b: 1, a: 0}
+  color6: {r: 0.75, g: 0.79819274, b: 1, a: 0}
 --- !u!1 &771733061
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1231161444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +449,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_Name
       value: FPSController
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.x

@@ -49,6 +49,7 @@ public class FireflyObj
 
     // Gives the class a GameObject to draw on the screen
     public GameObject firefly1 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+    //firely1 = this.gameObject;
 
     public FireflyObj()
     {
