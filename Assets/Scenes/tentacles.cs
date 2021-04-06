@@ -4,29 +4,48 @@ using UnityEngine;
 
 public class tentacles : MonoBehaviour
 {
+
+    Vector3 location;
+    Vector3 rotation;
+    Vector3 acceleration;
+    Vector3 velocity;
+    float topSpeed;
+
     List<tentacleOscillator> tentacleOscilattors = new List<tentacleOscillator>();
 
     void Start()
     {
-        while (tentacleOscilattors.Count < 10)
+        while (tentacleOscilattors.Count < 1)
         {
             tentacleOscilattors.Add(new tentacleOscillator());
         }
+
+
+        //mover
+        location = this.gameObject.transform.position; // Vector2.zero is a (0, 0) vector
+        velocity = new Vector3(1f, 0f, -1f);
+        acceleration = new Vector3(-0.1F, 0f, -1F);
+        topSpeed = 10F;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        location = this.gameObject.transform.position;
         foreach (tentacleOscillator o in tentacleOscilattors)
         {
             //Each oscillator object oscillating on the x-axis
             float x = Mathf.Sin(o.angle.x) * o.amplitude.x;
+            //float x = 4;
+
+
             //Each oscillator object oscillating on the y-axis
             float y = Mathf.Sin(o.angle.y) * o.amplitude.y;
+            //float y = 2;
             //Add the oscillator's velocity to its angle
             o.angle += o.velocity;
             // Draw the line for each oscillator
-            o.lineRender.SetPosition(1, o.oGameObject.transform.position);
+            o.lineRender.SetPosition(1, location);
             //Move the oscillator
             o.oGameObject.transform.transform.Translate(new Vector2(x, y) * Time.deltaTime);
         }
@@ -66,7 +85,7 @@ public class tentacleOscillator
         lineRender.material = new Material(Shader.Find("Diffuse"));
         //Begin rendering the line between the two objects. Set the first point (0) at the centerSphere Position
         //Make sure the end of the line (1) appears at the new Vector3
-        Vector2 center = new Vector2(0f, 0f);
+        Vector3 center = new Vector3(0f, 0f, 0f);
         lineRender.SetPosition(0, center);
     }
 
