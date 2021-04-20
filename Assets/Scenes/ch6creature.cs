@@ -8,6 +8,7 @@ public class ch6creature : MonoBehaviour
     public float maxforce;
     public float maxspeed;
     public float mass;
+    public float gravity = 657f;
 
     private GameObject vehicle;
     public GameObject food;
@@ -16,6 +17,15 @@ public class ch6creature : MonoBehaviour
     private float minX, maxX, minY, maxY, minZ, maxZ;
     private Vector3 location, velocity, acceleration;
     private float topSpeed;
+
+    enum State
+    {
+        Idle,
+        Hunting,
+        Return,
+    };
+
+    private State state;
 
 
     // Start is called before the first frame update
@@ -37,7 +47,7 @@ public class ch6creature : MonoBehaviour
         maxY = 20f;
 
 
-
+        state = State.Idle;
         //see food start
         body = vehicle.AddComponent<Rigidbody>();
         //assign the mover's GameObject to the varaible
@@ -57,6 +67,9 @@ public class ch6creature : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //idle state
+        //add random move behavior
+        /*
         velocity = new Vector3(1f, 0f, -1f);
 
         velocity += acceleration * Time.deltaTime;
@@ -66,7 +79,8 @@ public class ch6creature : MonoBehaviour
 
         this.transform.position = new Vector3(location.x, location.y, location.z);
         
-
+        /*
+        //chapter 6 seek movement 
         body.velocity = new Vector3(
             Mathf.Clamp(body.velocity.x, -maxspeed, maxspeed),
             Mathf.Clamp(body.velocity.y, -maxspeed, maxspeed),
@@ -79,15 +93,76 @@ public class ch6creature : MonoBehaviour
 
         Vector3 foodLocation = food.transform.position;
         seek(food.transform.position);
+        */
 
     }
 
-    private void Update()
+    void Update()
     {
+        Debug.Log(state);
+        StartCoroutine(BehaviorSwitch(3f));
+
+
+        switch (state)
+        {
+            case State.Idle:
+                //t += Time.deltaTime;
+                //this.Rotation(t, Radius, Speed);
+                velocity = new Vector3(1f, 0f, -1f);
+
+                velocity += acceleration * Time.deltaTime;
+                // Limit Velocity to the top speed
+                velocity = Vector3.ClampMagnitude(velocity, topSpeed);
+
+                // Moves the mover
+                location += velocity * Time.deltaTime;
+
+                CheckEdges();
+
+                // Updates the GameObject of this movement
+                this.transform.position = new Vector3(location.x, location.y, location.z);
+                break;
+            case State.Hunting:
+                this.transform.position = new Vector3(this.transform.position.x, 10f, this.transform.position.z);
+                break;
+
+            case State.Return:
+
+                break;
+        }
         CheckEdges();
+
+
     }
 
-    public void seek(Vector3 target)
+    IEnumerator BehaviorSwitch(float timer)
+    {
+        float rand = Random.Range(0f, 4f);
+
+        if(rand >= 2)
+        {
+            state = State.Hunting;
+        }
+
+        yield return new WaitForSeconds(timer);
+        Debug.Log("running");
+        StartCoroutine(BehaviorSwitch(timer));
+    }
+
+    
+
+    public Vector3 attract(GameObject predator)
+    {
+        Vector3 difference = location - predator.transform.position;
+        float dist = difference.magnitude;
+        Vector3 gravityDirection = difference.normalized;
+        float g = gravity * (mass * predator.GetComponent<Rigidbody>().mass) / (dist * dist);
+        Vector3 gravityVector = gravityDirection * g;
+
+        return gravityVector;
+    }
+
+    public void seek(Vector3 target) //turning movement
     {
         Vector3 desired = target - body.transform.position;
         desired.Normalize();

@@ -42,7 +42,7 @@ public class chapterOneCreature : MonoBehaviour
     {
         rb = GetComponent <Rigidbody>();
         location = this.gameObject.transform.position; // Vector2.zero is a (0, 0) vector
-        velocity = new Vector3(1f, 0f, -1f);
+        velocity = new Vector3(1f, 0f, 0f);
         acceleration = new Vector3(-0.1F, 0f, -1F);
         topSpeed = 10F;
 

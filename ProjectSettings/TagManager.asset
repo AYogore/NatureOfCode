@@ -7,6 +7,8 @@ TagManager:
   - wall
   - cell
   - food
+  - c1predetor
+  - predatortag
   layers:
   - Default
   - TransparentFX
