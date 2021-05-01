@@ -1,16 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Chapter 7 Figure 1: Wolfram Elementary Cellular Automata
-/// </summary>
-
-public class Chapter7Fig1 : MonoBehaviour 
+public class ch7creature : MonoBehaviour
 {
+    public GameObject creatureModel;
     // A list to store ruleset arrays
     public List<int[]> rulesetList = new List<int[]>();
-    
+
     // Custom Rulesets
     public int[] ruleSet0 = { 0, 1, 0, 1, 1, 0, 1, 0 };
     public int[] ruleSet1 = { 1, 0, 1, 0, 1, 0, 1, 0 };
@@ -19,12 +16,12 @@ public class Chapter7Fig1 : MonoBehaviour
     public int[] ruleSet4 = { 0, 0, 0, 1, 1, 0, 1, 0 };
     public int[] ruleSet5 = { 1, 0, 0, 1, 1, 0, 1, 0 };
     public int[] ruleSet6 = { 0, 1, 1, 0, 1, 0, 1, 1 };
-    
+
     private int rulesChosen;
 
     // An object to describe a Wolfram elementary Cellular Automata
-    Chapter7Fig1CA ca;
-
+    ch7creatureCA ca;
+    moverBody mover;
     // How long after the CA has been drawn before reloading the scene, choosing new rule
     private int delay = 0;
 
@@ -32,34 +29,43 @@ public class Chapter7Fig1 : MonoBehaviour
     void Start()
     {
         addRuleSetsToList();
-
+        mover = new moverBody(creatureModel);
         // Choosing a random rule set using Random.Range
         rulesChosen = Random.Range(0, rulesetList.Count);
-        int[] ruleset = rulesetList[rulesChosen]; 
-        ca = new Chapter7Fig1CA(ruleset); // Initialize CA
+        int[] ruleset = rulesetList[rulesChosen];
+        ca = new ch7creatureCA(ruleset, mover); // Initialize CA
 
-        limitFrameRate();
-        setOrthographicCamera();
-    }    
 
-    private void Update() 
+        StartCoroutine(TimeManagement());
+
+
+       
+    }
+
+    private void Update()
     {
-        ca.Display(); // Draw the CA
+        //ca.Display();
+        //ca.Generate();
+
+    }
+
+    IEnumerator TimeManagement()
+    {
+        yield return new WaitForSeconds(2.0f);
+        StartCoroutine(MovementManagement());
+        Debug.Log("in time");
+    }
+
+    IEnumerator MovementManagement()
+    {
+        yield return new WaitForSeconds(2.0f);
+        ca.Randomize();
+        ca.Restart();
         ca.Generate();
+        ca.Display();
+        StartCoroutine(TimeManagement());
+        Debug.Log("in move");
 
-        if (ca.IsFinished()) // If we're done, clear the screen, pick a new ruleset and restart
-        {
-            delay++;
-            if (delay > 30) 
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene                
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene            
-        }           
     }
 
     private void addRuleSetsToList()
@@ -73,20 +79,9 @@ public class Chapter7Fig1 : MonoBehaviour
         rulesetList.Add(ruleSet6);
     }
 
-    private void setOrthographicCamera()
-    {
-        Camera.main.orthographic = true;
-        Camera.main.orthographicSize = 10;
-    }
-
-    private void limitFrameRate()
-    {
-        Application.targetFrameRate = 30; 
-        QualitySettings.vSyncCount = 0;
-    }
 }
 
-public class Chapter7Fig1CA
+public class ch7creatureCA
 {
     private int[] cells; // An array of 0s and 1s
     private int generation; // How many generations?
@@ -94,24 +89,19 @@ public class Chapter7Fig1CA
     private int rowWidth; // How wide to make the array
     private int cellCapacity; // We limit how many cells we instantiate
     private int numberOfCells; // Which needs us to keep count
-    private Vector2 screenSize; 
-    private float yScreenOffset; // Cells are spawned with a small offset so they spawn in centered
-    private float xScreenOffset; 
 
-   
-    public Chapter7Fig1CA(int[] ruleSetToUse)
+    moverBody mb;
+    public ch7creatureCA(int[] ruleSetToUse, moverBody g)
     {
         rowWidth = 17;
         cellCapacity = 650;
-        yScreenOffset = 2.5f;
-        xScreenOffset = 1.25f;
+        mb = g;
 
         // How big our screen is in World Units
-        screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));        
         numberOfCells = 0;
         ruleset = ruleSetToUse;
         cells = new int[cellCapacity / rowWidth];
-        restart();
+        Restart();
     }
 
     public void Randomize() // If we wanted to make a random Ruleset
@@ -122,7 +112,7 @@ public class Chapter7Fig1CA
         }
     }
 
-    private void restart()
+    public void Restart()
     {
         for (int i = 0; i < cells.Length; i++)
         {
@@ -140,7 +130,7 @@ public class Chapter7Fig1CA
 
         // For every spot, determine new state by examing current state, and neighbor states
         // Ignore edges that only have one neighor
-        for (int i = 1; i < cells.Length-1; i++)
+        for (int i = 1; i < cells.Length - 1; i++)
         {
             int left = cells[i - 1]; // Left neighbor state
             int me = cells[i]; // Current state
@@ -152,35 +142,33 @@ public class Chapter7Fig1CA
         cells = nextGen;
         generation++;
     }
-    
+
     public void Display() // Drawing the cells. Cells with a state of 1 are black, cells with a state of 0 are white
     {
-     if (numberOfCells <= cellCapacity)
+        mb.CheckEdges();
+        
+        if (numberOfCells <= cellCapacity)
         {
             for (int i = 0; i < cells.Length; i++)
             {
-                GameObject newCell = GameObject.CreatePrimitive(PrimitiveType.Quad);                
-                numberOfCells++;                
-                Renderer r = newCell.GetComponent<Renderer>();
-                r.material = new Material(Shader.Find("Diffuse"));
-                Object.Destroy(newCell.GetComponent<BoxCollider>());
+                
+                numberOfCells++;
                 if (cells[i] == 1)
                 {
-                    r.material.color = Color.black;
+                    mb.Movement1();
+                    //moverBody.transform;
                 }
                 else
                 {
-                    r.material.color = Color.white;
+                    mb.Movement2();
                 }
 
-                // Set position based to lower left of screen, with screen offset
-                newCell.transform.position = new Vector3(i - screenSize.x - xScreenOffset, 
-                                                generation - screenSize.y + yScreenOffset);
+
             }
         }
     }
 
-    private int rules (int a, int b, int c) // Implementing the Wolfram rules
+    private int rules(int a, int b, int c) // Implementing the Wolfram rules
     {
         if (a == 1 && b == 1 && c == 1) return ruleset[0];
         if (a == 1 && b == 1 && c == 0) return ruleset[1];
@@ -193,11 +181,104 @@ public class Chapter7Fig1CA
         return 0;
     }
 
-    public bool IsFinished() // The CA is done if it reaches a height limit
+
+  
+    
+}
+
+public class moverBody
+{
+    Vector3 location;
+    Vector3 acceleration;
+    Vector3 velocity;
+    float topSpeed;
+
+    private float minX, maxX, minY, maxY, minZ, maxZ;
+
+
+    GameObject creatureBody;
+    public moverBody(GameObject g)
     {
-        if (generation > Screen.height / rowWidth)
-            return true;
-        else
-            return false;
+        creatureBody = GameObject.Instantiate(g);
+        velocity = Vector3.zero;
+        //acceleration = new Vector3(-1,0,1);
+        //velocity = new Vector3(1f, 0f, 0f);
+        topSpeed = 10F;
+        minX = 5f;
+        maxX = 50f;
+
+        minZ = 5f;
+        maxZ = 50f;
+
+        minY = 0f;
+        maxY = 20f;
+
+    }
+
+    public void Movement1()
+    {
+        location = creatureBody.transform.position;
+        velocity = new Vector3(1f, 0f, -1f);
+
+        velocity += acceleration * Time.deltaTime;
+        // Limit Velocity to the top speed
+        velocity = Vector3.ClampMagnitude(velocity, topSpeed);
+
+        // Moves the mover
+        location += velocity * Time.deltaTime;
+
+        creatureBody.transform.position = location;
+        Debug.Log("move1");
+    }
+
+    public void Movement2()
+    {
+        location = creatureBody.transform.position;
+
+        velocity = new Vector3(-1f, 0f, 1f);
+
+        velocity += acceleration * Time.deltaTime;
+        // Limit Velocity to the top speed
+        velocity = Vector3.ClampMagnitude(velocity, topSpeed);
+
+        // Moves the mover
+        location += velocity * Time.deltaTime;
+
+        creatureBody.transform.position = location;
+        Debug.Log("move2");
+
+    }
+
+    public void CheckEdges()
+    {
+
+        if (location.x > maxX)
+        {
+            location.x -= maxX - minX;
+        }
+        else if (location.x < minX)
+        {
+            location.x += maxX - minX;
+        }
+        if (location.y > maxY)
+        {
+            location.y -= maxY - minY;
+        }
+        else if (location.y < minY)
+        {
+            location.y += maxY - minY;
+        }
+
+        if (location.z > maxZ)
+        {
+            location.z -= maxZ - minZ;
+        }
+        else if (location.z < minZ)
+        {
+            location.z += maxZ - minZ;
+        }
     }
 }
+
+
+
