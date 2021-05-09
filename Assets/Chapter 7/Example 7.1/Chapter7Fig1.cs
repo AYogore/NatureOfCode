@@ -98,7 +98,6 @@ public class Chapter7Fig1CA
     private float yScreenOffset; // Cells are spawned with a small offset so they spawn in centered
     private float xScreenOffset; 
 
-   
     public Chapter7Fig1CA(int[] ruleSetToUse)
     {
         rowWidth = 17;

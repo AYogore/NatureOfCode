@@ -23,7 +23,7 @@ public class Chapter3Fig6 : MonoBehaviour
         lineRender.material = new Material(Shader.Find("Diffuse"));
         //Begin rendering the line between the two objects. Set the first point (0) at the centerSphere Position
         //Make sure the end of the line (1) appears at the new Vector3
-        Vector3 center = this.transform.position;
+        Vector2 center = new Vector2(0f, 0f);
         lineRender.SetPosition(0, center);
 
         //Create the sphere at the end of the line
@@ -42,7 +42,7 @@ public class Chapter3Fig6 : MonoBehaviour
         angle += aVelocity;
         
         //Place the sphere and the line at the position
-        sphere.transform.position = new Vector3(this.transform.position.x, 0f, 0f);
+        sphere.transform.position = new Vector2(x, 0f);
         lineRender.SetPosition(1, sphere.transform.position);
     }
 }

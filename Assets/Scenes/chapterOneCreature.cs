@@ -6,6 +6,7 @@ public class chapterOneCreature : MonoBehaviour
 {
 
     Vector3 location;
+    Vector3 rotation;
     Vector3 acceleration;
     Vector3 velocity;
 
