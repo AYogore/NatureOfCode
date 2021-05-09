@@ -734,13 +734,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2118584615}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 788f6589979be644fa4ac56b587ee56e, type: 3}
+  m_Script: {fileID: 11500000, guid: 97861ced9ced00941968dab0e8485159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 2
   maxForce: 2
-  coneMesh: {fileID: 0}
-  creaturePrefab: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  creaturePrefab: {fileID: 1096138241578298797, guid: 5c41296cc4913eb4f8056bf228837388,
+    type: 3}
 --- !u!136 &2118584617
 CapsuleCollider:
   m_ObjectHideFlags: 0
