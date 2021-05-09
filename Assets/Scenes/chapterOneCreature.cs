@@ -48,14 +48,14 @@ public class chapterOneCreature : MonoBehaviour
         acceleration = new Vector3(-0.1F, 0f, -1F);
         topSpeed = 10F;
 
-        minX = 5f;
+        minX = 0f;
         maxX = 50f;
 
-        minZ = 5f;
+        minZ = 0f;
         maxZ = 50f;
 
-        minY = 0f;
-        maxY = 20f;
+        minY = 5f;
+        maxY = 30f;
 
         state = State.Idle;
 

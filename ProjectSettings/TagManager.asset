@@ -9,6 +9,7 @@ TagManager:
   - food
   - c1predetor
   - predatortag
+  - predator no hunt
   layers:
   - Default
   - TransparentFX

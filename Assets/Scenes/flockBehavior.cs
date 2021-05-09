@@ -82,7 +82,6 @@ public class flockBehavior : MonoBehaviour
             initPos = new Vector3(Random.Range(minPos.x, maxPos.x), Random.Range(minPos.y, maxPos.y), Random.Range(minPos.z, maxPos.z));
             myVehicle.transform.position = new Vector3(initPos.x, initPos.y, initPos.z);
 
-            myVehicle.AddComponent<Rigidbody>();
             rb = myVehicle.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.useGravity = false; // Remember to ignore gravity!

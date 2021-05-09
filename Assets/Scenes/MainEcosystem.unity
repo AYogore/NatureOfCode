@@ -261,7 +261,7 @@ MonoBehaviour:
   chapterSevenCreatures: []
   chapterSevenCreature: {fileID: 1096138241578298797, guid: 5c41296cc4913eb4f8056bf228837388,
     type: 3}
-  chapterSevenCreaturePopulation: 80
+  chapterSevenCreaturePopulation: 10
   flockBehaviorScript: {fileID: 2118584616}
   chapterEightCreatures: []
   chapterEightCreature: {fileID: 0}
@@ -734,14 +734,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118584615}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97861ced9ced00941968dab0e8485159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 2
   maxForce: 2
-  creaturePrefab: {fileID: 1096138241578298797, guid: 5c41296cc4913eb4f8056bf228837388,
+  creaturePrefab: {fileID: 1096138241578298797, guid: 9a22b59e41c16084ca66535b1dea2cfa,
     type: 3}
   eco: {fileID: 671680339}
 --- !u!136 &2118584617

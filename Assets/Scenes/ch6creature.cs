@@ -15,8 +15,12 @@ public class ch6creature : MonoBehaviour
     private Rigidbody body;
 
     private float minX, maxX, minY, maxY, minZ, maxZ;
-    private Vector3 location, velocity, acceleration;
+    private Vector3 location, velocity, acceleration, tempVelocity;
+
+    public Vector3 futureLocation;
     private float topSpeed;
+
+    private float hunger;
 
     enum State
     {
@@ -43,8 +47,8 @@ public class ch6creature : MonoBehaviour
         minZ = 5f;
         maxZ = 50f;
 
-        minY = 0f;
-        maxY = 20f;
+        minY = 5f;
+        maxY = 30f;
 
 
         state = State.Idle;
@@ -60,6 +64,10 @@ public class ch6creature : MonoBehaviour
         body.useGravity = false;
 
         food = GameObject.FindGameObjectWithTag("food");
+
+        state = State.Idle;
+        StartCoroutine(BehaviorSwitch(3f));
+        StartCoroutine(VelocityRandomizer(3.0f));
 
 
     }
@@ -99,16 +107,16 @@ public class ch6creature : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(state);
-        StartCoroutine(BehaviorSwitch(3f));
 
+        
 
         switch (state)
         {
             case State.Idle:
+                this.gameObject.tag = "predatorIdle";
                 //t += Time.deltaTime;
                 //this.Rotation(t, Radius, Speed);
-                velocity = new Vector3(1f, 0f, -1f);
+                velocity = tempVelocity;
 
                 velocity += acceleration * Time.deltaTime;
                 // Limit Velocity to the top speed
@@ -130,6 +138,7 @@ public class ch6creature : MonoBehaviour
 
                 break;
         }
+        lookForward();
         CheckEdges();
 
 
@@ -138,18 +147,45 @@ public class ch6creature : MonoBehaviour
     IEnumerator BehaviorSwitch(float timer)
     {
         float rand = Random.Range(0f, 4f);
-
         if(rand >= 2)
         {
             state = State.Hunting;
+            this.gameObject.tag = "c1predetor";
+            Debug.Log("hunting");
+
+        }
+        else
+        {
+            location = this.gameObject.transform.position;
+
+            state = State.Idle;
+            Debug.Log("running");
         }
 
         yield return new WaitForSeconds(timer);
-        Debug.Log("running");
         StartCoroutine(BehaviorSwitch(timer));
     }
 
-    
+    IEnumerator VelocityRandomizer(float timer)
+    {
+        float rand = Random.Range(-10f, 10f);
+        float randY = Random.Range(-5f, 5f);
+        tempVelocity = new Vector3(rand, randY, rand);
+
+        float randTimer = Random.Range(1f, 5f);
+
+        yield return new WaitForSeconds(randTimer);
+        StartCoroutine(VelocityRandomizer(randTimer));
+    }
+
+    private void lookForward()
+    {
+       
+        futureLocation = location + velocity;
+        this.gameObject.transform.LookAt(futureLocation); // We can use the built in 'LookAt' function to automatically face us the right direction
+
+        
+    }
 
     public Vector3 attract(GameObject predator)
     {

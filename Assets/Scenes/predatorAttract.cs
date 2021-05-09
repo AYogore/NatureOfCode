@@ -35,8 +35,9 @@ public class predatorAttract : MonoBehaviour
                     location = this.gameObject.transform.position;
                     Vector3 desired = this.transform.position - predator.transform.position;
 
-                    predator.transform.GetComponent<Rigidbody>().AddForce(desired, ForceMode.Acceleration);
-                    predator.transform.GetComponent<Rigidbody>().AddForce(attract(predator), ForceMode.Acceleration);
+                    //predator.transform.LookAt(desired + predator.GetComponent<ch6creature>().futureLocation);
+                    predator.transform.GetComponent<Rigidbody>().AddForce(desired, ForceMode.Force);
+                    predator.transform.GetComponent<Rigidbody>().AddForce(attract(predator), ForceMode.Force);
 
                     float dist = Vector3.Distance(predator.transform.position, location);
                     //4f
@@ -46,6 +47,7 @@ public class predatorAttract : MonoBehaviour
                         if (predatorTag == "c1predetor")
                         {
                             eco.chapterOneCreatures.Remove(this.gameObject);
+                            //predator.tag = "predator no hunt";
                             
                         }
                         else if (predatorTag == "c2predetor")
