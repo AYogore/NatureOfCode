@@ -9,6 +9,7 @@ public class chapterOneCreature : MonoBehaviour
     Vector3 rotation;
     Vector3 acceleration;
     Vector3 velocity;
+    Vector3 tempVelocity;
 
     enum State
     {
@@ -43,6 +44,7 @@ public class chapterOneCreature : MonoBehaviour
         rb = GetComponent <Rigidbody>();
         location = this.gameObject.transform.position; // Vector2.zero is a (0, 0) vector
         velocity = new Vector3(1f, 0f, 0f);
+        tempVelocity = new Vector3(0f, 0f, 0f);
         acceleration = new Vector3(-0.1F, 0f, -1F);
         topSpeed = 10F;
 
@@ -57,6 +59,8 @@ public class chapterOneCreature : MonoBehaviour
 
         state = State.Idle;
 
+        StartCoroutine(VelocityRandomizer(3.0f));
+
     }
 
     // Update is called once per frame
@@ -68,8 +72,7 @@ public class chapterOneCreature : MonoBehaviour
             case State.Idle:
                 //t += Time.deltaTime;
                 //this.Rotation(t, Radius, Speed);
-                velocity = new Vector3(1f, 0f, -1f);
-
+                velocity = tempVelocity;
                 velocity += acceleration * Time.deltaTime; 
                 // Limit Velocity to the top speed
                 velocity = Vector3.ClampMagnitude(velocity, topSpeed);
@@ -92,6 +95,18 @@ public class chapterOneCreature : MonoBehaviour
         }
         
 
+    }
+
+    IEnumerator VelocityRandomizer(float timer)
+    {
+        float rand = Random.Range(-10f, 10f);
+        float randY = Random.Range(-5f, 5f);
+        tempVelocity = new Vector3(rand, randY, rand);
+
+        float randTimer = Random.Range(1f, 5f);
+
+        yield return new WaitForSeconds(randTimer);
+        StartCoroutine(VelocityRandomizer(randTimer));
     }
 
     public void ApplyForce(Vector2 force)

@@ -49,7 +49,7 @@ public class ch6creature : MonoBehaviour
 
         state = State.Idle;
         //see food start
-        body = vehicle.AddComponent<Rigidbody>();
+        body = vehicle.GetComponent<Rigidbody>();
         //assign the mover's GameObject to the varaible
 
         r = 3.0f;

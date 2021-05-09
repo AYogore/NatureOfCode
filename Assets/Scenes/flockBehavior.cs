@@ -11,11 +11,18 @@ public class flockBehavior : MonoBehaviour
     private List<Eco6Boid> boids; // Declare a List of Vehicle objects.
     private Vector3 minimumPos, maximumPos;
 
+    public ecosystem eco;
+    private int flockCreaturesCount;
+
     // Start is called before the first frame update
     void Start()
     {
+        eco = GameObject.Find("EcosystemController").GetComponent<ecosystem>();
+        flockCreaturesCount = eco.chapterSevenCreaturePopulation;
+
+
         boids = new List<Eco6Boid>(); // Initilize and fill the List with a bunch of Vehicles
-        for (int i = 0; i < 80; i++)
+        for (int i = 0; i < flockCreaturesCount; i++)
         {
             float ranX = Random.Range(-3.0f, 3.0f);
             float ranY = Random.Range(-3.0f, 3.0f);
@@ -23,7 +30,13 @@ public class flockBehavior : MonoBehaviour
             minimumPos = new Vector3(5f, 5f, 5f);
             maximumPos = new Vector3(40f, 10f, 40f);
             boids.Add(new Eco6Boid(new Vector3(ranX, ranY, ranZ), minimumPos, maximumPos, maxSpeed, maxForce, creaturePrefab));
+
+            GameObject creature = boids[i].AddToEcoCount();
+            eco.chapterSevenCreatures.Add(creature);
+            
+            
         }
+
     }
 
     // Update is called once per frame
@@ -55,6 +68,7 @@ public class flockBehavior : MonoBehaviour
         private Vector3 minPos, maxPos;
         private GameObject myVehicle;
         private Rigidbody rb;
+        public ecosystem ecoInBoidclass;
 
         public Eco6Boid(Vector3 initPos, Vector3 _minPos, Vector3 _maxPos, float _maxSpeed, float _maxForce, GameObject prefab)
         {
@@ -63,6 +77,8 @@ public class flockBehavior : MonoBehaviour
             maxSpeed = _maxSpeed;
             maxForce = _maxForce;
             myVehicle = GameObject.Instantiate(prefab);
+
+
             initPos = new Vector3(Random.Range(minPos.x, maxPos.x), Random.Range(minPos.y, maxPos.y), Random.Range(minPos.z, maxPos.z));
             myVehicle.transform.position = new Vector3(initPos.x, initPos.y, initPos.z);
 
@@ -71,6 +87,11 @@ public class flockBehavior : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.useGravity = false; // Remember to ignore gravity!
 
+        }
+
+        public GameObject AddToEcoCount()
+        {
+            return myVehicle;
         }
 
         private void checkBounds()

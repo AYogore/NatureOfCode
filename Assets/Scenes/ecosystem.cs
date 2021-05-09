@@ -7,7 +7,7 @@ public class ecosystem : MonoBehaviour
 {
     //This is the full ecosystem controller
 
-    //Chapter 1 creature
+    //Chapter 1 creature moving left to right
     public List<GameObject> chapterOneCreatures = new List<GameObject>();
     public GameObject chapterOneCreature;
     public int chapterOneCreaturePopulation;
@@ -21,15 +21,17 @@ public class ecosystem : MonoBehaviour
     public GameObject chapterThreeCreature;
     public int chapterThreeCreaturePopulation;
 
-    //Chapter 6 creature
+    //Chapter 6 creature predator
     public List<GameObject> chapterSixCreatures = new List<GameObject>();
     public GameObject chapterSixCreature;
     public int chapterSixCreaturePopulation;
 
-    //Chapter 7 creature
+    //Chapter 7 creature flock
     public List<GameObject> chapterSevenCreatures = new List<GameObject>();
     public GameObject chapterSevenCreature;
     public int chapterSevenCreaturePopulation;
+
+    public flockBehavior flockBehaviorScript;
 
     //Chapter 8 creature
     public List<GameObject> chapterEightCreatures = new List<GameObject>();
@@ -51,8 +53,16 @@ public class ecosystem : MonoBehaviour
         for (int i = 0; i < chapterSixCreaturePopulation; i++)
         {
             chapterOneCreature = Instantiate(chapterSixCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
-            chapterOneCreatures.Add(chapterOneCreature);
+            chapterSixCreatures.Add(chapterSixCreature);
         }
+
+        for (int i = 0; i < chapterSevenCreaturePopulation; i++)
+        {
+            chapterSevenCreature = Instantiate(chapterSevenCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
+        
+        }
+        flockBehaviorScript = chapterSevenCreature.GetComponent<flockBehavior>();
+        chapterSevenCreatures = flockBehaviorScript.eco.chapterSevenCreatures;
     }
 
     // Update is called once per frame

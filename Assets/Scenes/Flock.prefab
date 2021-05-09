@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 3862214815320599129}
   - component: {fileID: 9021085465952297060}
   - component: {fileID: 2810159085015656392}
+  - component: {fileID: 5591637607927424561}
   m_Layer: 0
   m_Name: Flock
   m_TagString: Untagged
@@ -141,7 +142,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &9021085465952297060
 BoxCollider:
@@ -168,12 +169,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0dd5da484be04fb9e2cddd9d24d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 657
+  gravity: 50
   mass: 0
   predator: {fileID: 1096138241578298797, guid: 8aa04a02a22a1e5408319545a2e6d600,
     type: 3}
   predatorTag: c1predetor
   alive: 1
+--- !u!114 &5591637607927424561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096138241578298797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39e3f6d61267c64c880c701077a4cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Radius: 0
+  Speed: 0
+  r: 0
+  maxforce: 0
+  maxspeed: 10
+  mass: 0
+  rb: {fileID: 0}
+  foodObj: {fileID: 0}
 --- !u!1 &1096138241589150474
 GameObject:
   m_ObjectHideFlags: 0
