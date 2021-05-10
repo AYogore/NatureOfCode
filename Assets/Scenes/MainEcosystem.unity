@@ -245,22 +245,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chapterOneCreatures: []
-  chapterOneCreature: {fileID: 1096138241578298797, guid: 8aa04a02a22a1e5408319545a2e6d600,
+  chapterOneCreature: {fileID: 1096138241578298797, guid: f57b4d13decf6dd46bd0acf991e1d2b2,
     type: 3}
-  chapterOneCreaturePopulation: 2
+  chapterOneCreaturePopulation: 30
   chapterTwoCreatures: []
-  chapterTwoCreature: {fileID: 0}
-  chapterTwoCreaturePopulation: 0
-  chapterThreeCreatures: []
-  chapterThreeCreature: {fileID: 0}
-  chapterThreeCreaturePopulation: 0
-  chapterSixCreatures: []
-  chapterSixCreature: {fileID: 1096138241578298797, guid: f57b4d13decf6dd46bd0acf991e1d2b2,
+  chapterTwoCreature: {fileID: 2831267679429728437, guid: 2d877fde121ec984686d45af76416df7,
     type: 3}
-  chapterSixCreaturePopulation: 0
+  chapterTwoCreaturePopulation: 4
+  chapterThreeCreatures: []
+  chapterThreeCreature: {fileID: 1096138241578298797, guid: 5c41296cc4913eb4f8056bf228837388,
+    type: 3}
+  chapterThreeCreaturePopulation: 20
+  chapterSixCreatures: []
+  chapterSixCreature: {fileID: 1096138241578298797, guid: 8aa04a02a22a1e5408319545a2e6d600,
+    type: 3}
+  chapterSixCreaturePopulation: 4
   chapterSevenCreatures: []
   chapterSevenCreature: {fileID: 0}
-  chapterSevenCreaturePopulation: 0
+  chapterSevenCreaturePopulation: 80
   flockBehaviorScript: {fileID: 2118584616}
   chapterEightCreatures: []
   chapterEightCreature: {fileID: 0}
@@ -735,7 +737,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118584615}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97861ced9ced00941968dab0e8485159, type: 3}
   m_Name: 

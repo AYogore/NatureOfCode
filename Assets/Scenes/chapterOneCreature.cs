@@ -33,11 +33,18 @@ public class chapterOneCreature : MonoBehaviour
 
     public Rigidbody rb;
 
-    public GameObject foodObj;
+    public GameObject thisGameObj;
+    public GameObject nestGO;
 
+    private float birthCount;
+    private float deathCount;
+
+    public int maxOffspring;
+    public int currentOffspring;
 
     private float minX, maxX, minY, maxY, minZ, maxZ;
 
+    public ecosystem eco;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,19 +66,31 @@ public class chapterOneCreature : MonoBehaviour
 
         state = State.Idle;
 
-        StartCoroutine(VelocityRandomizer(3.0f));
+        StartCoroutine(VelocityRandomizer(1.0f));
 
+        float randBC = Random.Range(-5f, 1f);
+        birthCount = 0 + randBC;
+        deathCount = 20 + randBC;
+        nestGO = GameObject.FindGameObjectWithTag("Nest");
+        maxOffspring = 1;
+
+        eco = GameObject.Find("EcosystemController").GetComponent<ecosystem>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        //Debug.Log("birth count = " + birthCount);
+        deathCount -= Time.deltaTime;
+        if (deathCount <= 0)
+        {
+            eco.chapterOneCreatures.Remove(this.gameObject);
+            Destroy(this.gameObject);
+        }
         switch (state)
         {
             case State.Idle:
-                //t += Time.deltaTime;
-                //this.Rotation(t, Radius, Speed);
+               
                 velocity = tempVelocity;
                 velocity += acceleration * Time.deltaTime; 
                 // Limit Velocity to the top speed
@@ -84,12 +103,34 @@ public class chapterOneCreature : MonoBehaviour
 
                 // Updates the GameObject of this movement
                 this.transform.position = new Vector3(location.x, location.y, location.z);
+                birthCount += Time.deltaTime;
+                if (birthCount >= 10)
+                {
+                    velocity = nestGO.transform.position - this.gameObject.transform.position;
+
+                    state = State.Return;
+                    birthCount = 0;
+                    
+                }
                 break;
             case State.Hunting:
-                seek(foodObj.transform.position);
                 break;
 
             case State.Return:
+                
+                if(currentOffspring <= maxOffspring)
+                {
+                    birthCount = 0;
+                    StartCoroutine(BirthCount(10f));
+
+                    state = State.Idle;
+                }
+
+                else
+                {
+                    birthCount = 0;
+                    state = State.Idle;      
+                }
 
                 break;
         }
@@ -99,15 +140,34 @@ public class chapterOneCreature : MonoBehaviour
 
     IEnumerator VelocityRandomizer(float timer)
     {
-        float rand = Random.Range(-10f, 10f);
+        float randX = Random.Range(-10f, 10f);
         float randY = Random.Range(-5f, 5f);
-        tempVelocity = new Vector3(rand, randY, rand);
+        float randZ = Random.Range(-10f, 10f);
+
+        tempVelocity = new Vector3(randX, randY, randZ);
 
         float randTimer = Random.Range(1f, 5f);
 
         yield return new WaitForSeconds(randTimer);
         StartCoroutine(VelocityRandomizer(randTimer));
     }
+
+    IEnumerator BirthCount(float timer)
+    {
+
+        float bCount = birthCount;
+        if(bCount >= 0)
+        {
+            birthCount = 0;
+            GiveBirth();
+        }
+
+        float rand = Random.Range(-2f, 2f);
+        
+        yield return new WaitForSeconds(rand + timer);
+    }
+
+    
 
     public void ApplyForce(Vector2 force)
     {
@@ -128,11 +188,23 @@ public class chapterOneCreature : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "food")
+        if(collision.gameObject.tag == "fish")
         {
-            state = State.Hunting;
-            foodObj = collision.gameObject;
+            //birthCount += 1;
         }
+    }
+
+    public void GiveBirth()
+    {
+        birthCount = 0;
+        GameObject child = thisGameObj;
+        
+        eco.chapterOneCreatures.Add(child);
+        Instantiate(child, nestGO.transform.position, Quaternion.identity);
+
+        currentOffspring += 1;
+        
+        state = State.Idle;
     }
 
     /*public void Rotation(float t, float radius, float speed)

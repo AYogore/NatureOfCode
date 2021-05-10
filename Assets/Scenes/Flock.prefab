@@ -103,7 +103,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1096138241578298799}
   - component: {fileID: 3862214815320599129}
-  - component: {fileID: 9021085465952297060}
   - component: {fileID: 2810159085015656392}
   - component: {fileID: 5591637607927424561}
   m_Layer: 0
@@ -148,19 +147,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &9021085465952297060
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1096138241578298797}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 0, z: 5}
 --- !u!114 &2810159085015656392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,10 +181,14 @@ MonoBehaviour:
   Speed: 0
   r: 0
   maxforce: 0
-  maxspeed: 10
+  maxspeed: 0
   mass: 0
   rb: {fileID: 0}
-  foodObj: {fileID: 0}
+  thisGameObj: {fileID: 0}
+  nestGO: {fileID: 0}
+  maxOffspring: 0
+  currentOffspring: 0
+  eco: {fileID: 0}
 --- !u!1 &1096138241589150474
 GameObject:
   m_ObjectHideFlags: 0

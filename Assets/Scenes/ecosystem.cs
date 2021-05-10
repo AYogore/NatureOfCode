@@ -44,19 +44,33 @@ public class ecosystem : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < chapterOneCreaturePopulation; i++)
+
+        StartCoroutine(ShortenList());
+        for(int i = 0; i < chapterOneCreaturePopulation; i++) //grey
         {
             chapterOneCreature = Instantiate(chapterOneCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 20f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
             chapterOneCreatures.Add(chapterOneCreature);
         }
 
-        for (int i = 0; i < chapterSixCreaturePopulation; i++)
+        for (int i = 0; i < chapterTwoCreaturePopulation; i++) //nest
         {
-            chapterOneCreature = Instantiate(chapterSixCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
+            chapterTwoCreature = Instantiate(chapterTwoCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 20f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
+            chapterTwoCreatures.Add(chapterTwoCreature);
+        }
+
+        for (int i = 0; i < chapterThreeCreaturePopulation; i++) //oscillation
+        {
+            chapterThreeCreature = Instantiate(chapterThreeCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 20f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
+            chapterThreeCreatures.Add(chapterThreeCreature);
+        }
+
+        for (int i = 0; i < chapterSixCreaturePopulation; i++) //predator
+        {
+            chapterSixCreature = Instantiate(chapterSixCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
             chapterSixCreatures.Add(chapterSixCreature);
         }
 
-        for (int i = 0; i < chapterSevenCreaturePopulation; i++)
+        for (int i = 0; i < chapterSevenCreaturePopulation; i++) //flock
         {
             chapterSevenCreature = Instantiate(chapterSevenCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
         
@@ -69,5 +83,18 @@ public class ecosystem : MonoBehaviour
     void Update()
     {
         
+    }
+
+    IEnumerator ShortenList()
+    {
+
+        chapterOneCreatures.RemoveAll(item => item == null);
+        chapterTwoCreatures.RemoveAll(item => item == null);
+        chapterThreeCreatures.RemoveAll(item => item == null);
+        chapterSixCreatures.RemoveAll(item => item == null);
+        chapterSevenCreatures.RemoveAll(item => item == null);
+        yield return new WaitForSeconds(1.0f);
+
+        StartCoroutine(ShortenList());
     }
 }

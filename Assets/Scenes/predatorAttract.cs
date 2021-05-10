@@ -46,13 +46,17 @@ public class predatorAttract : MonoBehaviour
                         alive = false;
                         if (predatorTag == "c1predetor")
                         {
-                            eco.chapterOneCreatures.Remove(this.gameObject);
-                            //predator.tag = "predator no hunt";
+                            var predScipt = predator.GetComponent<ch6creature>();
+                            eco.chapterSixCreatures.Remove(this.gameObject);
+
+                            predScipt.hunger += 10;
+                            predScipt.Mate();
+                            predator.tag = "predatorMate";
                             
                         }
-                        else if (predatorTag == "c2predetor")
+                        else if (predatorTag == "")
                         {
-                            eco.chapterTwoCreatures.Remove(this.gameObject);
+                            
                         }
                         else if (predatorTag == "")
                         {

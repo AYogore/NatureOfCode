@@ -20,9 +20,9 @@ public class ch6creature : MonoBehaviour
     public Vector3 futureLocation;
     private float topSpeed;
 
-    private float hunger;
+    public float hunger;
 
-    enum State
+    public enum State
     {
         Idle,
         Hunting,
@@ -82,7 +82,7 @@ public class ch6creature : MonoBehaviour
     void Update()
     {
 
-        hunger -= Time.deltaTime;
+        //hunger -= Time.deltaTime;
         if(hunger <= 0)
         {
             Destroy(this.gameObject);
@@ -94,7 +94,6 @@ public class ch6creature : MonoBehaviour
                 this.gameObject.tag = "predatorIdle";
                 velocity = tempVelocity;
                 velocity += acceleration * Time.deltaTime;
-                // Limit Velocity to the top speed
                 velocity = Vector3.ClampMagnitude(velocity, topSpeed);
                 location += velocity * Time.deltaTime;
 
@@ -108,7 +107,6 @@ public class ch6creature : MonoBehaviour
                 this.gameObject.tag = "c1predetor";
                 break;
             case State.Return:
-
                 break;
         }
         lookForward();
@@ -145,17 +143,17 @@ public class ch6creature : MonoBehaviour
         float randY = Random.Range(-5f, 5f);
         tempVelocity = new Vector3(rand, randY, rand);
 
-        float randTimer = Random.Range(1f, 5f);
+        float randTimer = timer + Random.Range(1f, 5f);
 
         yield return new WaitForSeconds(randTimer);
         StartCoroutine(VelocityRandomizer(randTimer));
     }
-    IEnumerator DeathTimer(float timer)
+    IEnumerator MateTimer(float timer)
     {
-        float rand = Random.Range(-10f, 10f);
-        float deathTimer = timer + rand;
-        yield return new WaitForSeconds(deathTimer);
-        StartCoroutine(VelocityRandomizer(deathTimer));
+        
+        Debug.Log("mating");
+        yield return new WaitForSeconds(timer);
+        state = State.Idle;
     }
 
     private void lookForward()
@@ -250,5 +248,11 @@ public class ch6creature : MonoBehaviour
         {
             location.z += maxZ - minZ;
         }
+    }
+
+    public void Mate()
+    {
+        state = State.Return;
+        StartCoroutine(MateTimer(3.0f));
     }
 }

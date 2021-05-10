@@ -290,7 +290,6 @@ GameObject:
   - component: {fileID: 1096138241578298799}
   - component: {fileID: 1096138241578298798}
   - component: {fileID: 3862214815320599129}
-  - component: {fileID: 9021085465952297060}
   - component: {fileID: 2785723195612420454}
   m_Layer: 0
   m_Name: '6Creature '
@@ -348,19 +347,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &9021085465952297060
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1096138241578298797}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 0, z: 5}
 --- !u!114 &2785723195612420454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +366,7 @@ MonoBehaviour:
   gravity: 50
   food: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
   futureLocation: {x: 0, y: 0, z: 0}
+  hunger: 0
 --- !u!1 &1096138241862212978
 GameObject:
   m_ObjectHideFlags: 0

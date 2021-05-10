@@ -85,6 +85,8 @@ public class flockBehavior : MonoBehaviour
             rb = myVehicle.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.useGravity = false; // Remember to ignore gravity!
+            ecoInBoidclass = GameObject.Find("EcosystemController").GetComponent<ecosystem>();
+            ecoInBoidclass.chapterSixCreatures.Add(myVehicle);
 
         }
 
