@@ -86,7 +86,13 @@ public class flockBehavior : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.useGravity = false; // Remember to ignore gravity!
             ecoInBoidclass = GameObject.Find("EcosystemController").GetComponent<ecosystem>();
-            ecoInBoidclass.chapterSixCreatures.Add(myVehicle);
+            ecoInBoidclass.chapterSevenCreatures.Add(myVehicle);
+
+            //remove start count since its only used for loop in this code, latter is the real list of boids on ecolist
+            for(int i = 0; i <= ecoInBoidclass.chapterSevenCreaturePopulation; i++)
+            {
+                ecoInBoidclass.chapterSevenCreatures.Remove(myVehicle);
+            }
 
         }
 

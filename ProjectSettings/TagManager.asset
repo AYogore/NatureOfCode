@@ -12,6 +12,8 @@ TagManager:
   - predator no hunt
   - predatorIdle
   - fish
+  - Nest
+  - predatorMate
   layers:
   - Default
   - TransparentFX

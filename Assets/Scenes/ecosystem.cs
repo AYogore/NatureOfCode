@@ -28,7 +28,7 @@ public class ecosystem : MonoBehaviour
 
     //Chapter 7 creature flock
     public List<GameObject> chapterSevenCreatures = new List<GameObject>();
-    public GameObject chapterSevenCreature;
+    //public GameObject chapterSevenCreature;
     public int chapterSevenCreaturePopulation;
 
     public flockBehavior flockBehaviorScript;
@@ -72,10 +72,10 @@ public class ecosystem : MonoBehaviour
 
         for (int i = 0; i < chapterSevenCreaturePopulation; i++) //flock
         {
-            chapterSevenCreature = Instantiate(chapterSevenCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
+            //chapterSevenCreature = Instantiate(chapterSevenCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
         
         }
-        flockBehaviorScript = chapterSevenCreature.GetComponent<flockBehavior>();
+        //flockBehaviorScript = chapterSevenCreature.GetComponent<flockBehavior>();
         chapterSevenCreatures = flockBehaviorScript.eco.chapterSevenCreatures;
     }
 

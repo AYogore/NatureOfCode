@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 3862214815320599129}
   - component: {fileID: 2810159085015656392}
   - component: {fileID: 5591637607927424561}
+  - component: {fileID: 1579565429557864386}
   m_Layer: 0
   m_Name: Oscillation
   m_TagString: fish
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096138241578298797}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b39e3f6d61267c64c880c701077a4cd4, type: 3}
   m_Name: 
@@ -180,7 +181,31 @@ MonoBehaviour:
   maxspeed: 10
   mass: 0
   rb: {fileID: 0}
-  thisGameObj: {fileID: 0}
+  thisGameObj: {fileID: 1096138241578298797}
+  nestGO: {fileID: 0}
+  maxOffspring: 2
+  currentOffspring: 0
+  eco: {fileID: 0}
+--- !u!114 &1579565429557864386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096138241578298797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760529117482267448d17cfdadecb573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Radius: 0
+  Speed: 0
+  r: 0
+  maxforce: 0
+  maxspeed: 10
+  mass: 0
+  rb: {fileID: 0}
+  thisGameObj: {fileID: 1096138241578298797}
   nestGO: {fileID: 0}
   maxOffspring: 2
   currentOffspring: 0

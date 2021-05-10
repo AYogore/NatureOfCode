@@ -184,7 +184,7 @@ MonoBehaviour:
   maxspeed: 0
   mass: 0
   rb: {fileID: 0}
-  thisGameObj: {fileID: 0}
+  thisGameObj: {fileID: 1096138241578298797}
   nestGO: {fileID: 0}
   maxOffspring: 0
   currentOffspring: 0
