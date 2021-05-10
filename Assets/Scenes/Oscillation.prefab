@@ -107,8 +107,8 @@ GameObject:
   - component: {fileID: 2810159085015656392}
   - component: {fileID: 5591637607927424561}
   m_Layer: 0
-  m_Name: Flock
-  m_TagString: Untagged
+  m_Name: Oscillation
+  m_TagString: fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

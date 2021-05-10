@@ -27,8 +27,8 @@ public class flockBehavior : MonoBehaviour
             float ranX = Random.Range(-3.0f, 3.0f);
             float ranY = Random.Range(-3.0f, 3.0f);
             float ranZ = Random.Range(-3.0f, 3.0f);
-            minimumPos = new Vector3(5f, 5f, 5f);
-            maximumPos = new Vector3(40f, 10f, 40f);
+            minimumPos = new Vector3(0f, 5f, 0f);
+            maximumPos = new Vector3(50f, 30f, 30f);
             boids.Add(new Eco6Boid(new Vector3(ranX, ranY, ranZ), minimumPos, maximumPos, maxSpeed, maxForce, creaturePrefab));
 
             GameObject creature = boids[i].AddToEcoCount();

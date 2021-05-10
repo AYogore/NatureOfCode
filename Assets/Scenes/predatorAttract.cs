@@ -35,7 +35,7 @@ public class predatorAttract : MonoBehaviour
                     location = this.gameObject.transform.position;
                     Vector3 desired = this.transform.position - predator.transform.position;
 
-                    //predator.transform.LookAt(desired + predator.GetComponent<ch6creature>().futureLocation);
+                    predator.transform.LookAt(desired + predator.GetComponent<ch6creature>().futureLocation);
                     predator.transform.GetComponent<Rigidbody>().AddForce(desired, ForceMode.Force);
                     predator.transform.GetComponent<Rigidbody>().AddForce(attract(predator), ForceMode.Force);
 

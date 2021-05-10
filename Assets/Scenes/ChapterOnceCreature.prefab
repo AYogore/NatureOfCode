@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 2810159085015656392}
   m_Layer: 0
   m_Name: ChapterOnceCreature
-  m_TagString: Untagged
+  m_TagString: fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -41,10 +41,10 @@ public class ch6creature : MonoBehaviour
         acceleration = new Vector3(-0.1F, 0f, -1F);
         topSpeed = 10f;
 
-        minX = 5f;
+        minX = 0f;
         maxX = 50f;
 
-        minZ = 5f;
+        minZ = 0f;
         maxZ = 50f;
 
         minY = 5f;
@@ -69,71 +69,44 @@ public class ch6creature : MonoBehaviour
         StartCoroutine(BehaviorSwitch(3f));
         StartCoroutine(VelocityRandomizer(3.0f));
 
+        hunger = 10f;
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //idle state
-        //add random move behavior
-        /*
-        velocity = new Vector3(1f, 0f, -1f);
-
-        velocity += acceleration * Time.deltaTime;
-        // Limit Velocity to the top speed
-        velocity = Vector3.ClampMagnitude(velocity, topSpeed);
-        location += velocity * Time.deltaTime;
-
-        this.transform.position = new Vector3(location.x, location.y, location.z);
         
-        /*
-        //chapter 6 seek movement 
-        body.velocity = new Vector3(
-            Mathf.Clamp(body.velocity.x, -maxspeed, maxspeed),
-            Mathf.Clamp(body.velocity.y, -maxspeed, maxspeed),
-            Mathf.Clamp(body.velocity.z, -maxspeed, maxspeed));
-
-        //arrive(target.transform.position);
-        vehicle.transform.rotation = Quaternion.LookRotation(body.angularVelocity);
-       
-        food = GameObject.FindGameObjectWithTag("Player");
-
-        Vector3 foodLocation = food.transform.position;
-        seek(food.transform.position);
-        */
-
     }
 
     void Update()
     {
 
-        
+        hunger -= Time.deltaTime;
+        if(hunger <= 0)
+        {
+            Destroy(this.gameObject);
+        }
 
         switch (state)
         {
             case State.Idle:
                 this.gameObject.tag = "predatorIdle";
-                //t += Time.deltaTime;
-                //this.Rotation(t, Radius, Speed);
                 velocity = tempVelocity;
-
                 velocity += acceleration * Time.deltaTime;
                 // Limit Velocity to the top speed
                 velocity = Vector3.ClampMagnitude(velocity, topSpeed);
-
-                // Moves the mover
                 location += velocity * Time.deltaTime;
 
                 CheckEdges();
 
-                // Updates the GameObject of this movement
                 this.transform.position = new Vector3(location.x, location.y, location.z);
                 break;
+
             case State.Hunting:
                 this.transform.position = new Vector3(this.transform.position.x, 10f, this.transform.position.z);
+                this.gameObject.tag = "c1predetor";
                 break;
-
             case State.Return:
 
                 break;
@@ -149,18 +122,18 @@ public class ch6creature : MonoBehaviour
         float rand = Random.Range(0f, 4f);
         if(rand >= 2)
         {
-            state = State.Hunting;
-            this.gameObject.tag = "c1predetor";
-            Debug.Log("hunting");
+            if(state == State.Idle)
+            {
+                state = State.Hunting;
+            }
+            else
+            {
+                location = this.gameObject.transform.position;
+                state = State.Idle;
+            }
 
         }
-        else
-        {
-            location = this.gameObject.transform.position;
-
-            state = State.Idle;
-            Debug.Log("running");
-        }
+        
 
         yield return new WaitForSeconds(timer);
         StartCoroutine(BehaviorSwitch(timer));
@@ -176,6 +149,13 @@ public class ch6creature : MonoBehaviour
 
         yield return new WaitForSeconds(randTimer);
         StartCoroutine(VelocityRandomizer(randTimer));
+    }
+    IEnumerator DeathTimer(float timer)
+    {
+        float rand = Random.Range(-10f, 10f);
+        float deathTimer = timer + rand;
+        yield return new WaitForSeconds(deathTimer);
+        StartCoroutine(VelocityRandomizer(deathTimer));
     }
 
     private void lookForward()

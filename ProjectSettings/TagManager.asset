@@ -10,6 +10,8 @@ TagManager:
   - c1predetor
   - predatortag
   - predator no hunt
+  - predatorIdle
+  - fish
   layers:
   - Default
   - TransparentFX

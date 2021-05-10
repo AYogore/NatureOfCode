@@ -7,6 +7,7 @@ public class pTerrain : MonoBehaviour
 
     List<Vector3> terrainArray = new List<Vector3>();
     public GameObject terrainCube;
+    public GameObject plant;
 
     //Rows and Columns to set limits for procedural cube
     public int columns, rows;
@@ -44,6 +45,13 @@ public class pTerrain : MonoBehaviour
                 terrainCube = Instantiate(terrainCube, new Vector3(i, theta, j), perlinRotation);
                 //creates cube at set row and column (x,z) but random height (y)
                 terrainCube.transform.SetParent(terrain.transform);
+
+                ////add in random plant
+                //float rand = Random.Range(0f, 4f);
+                //if(rand <= 1)
+                //{
+                //    Instantiate(plant, terrainCube.transform);
+                //}
 
                 Renderer terrainRenderer = terrainCube.GetComponent<Renderer>();
                 terrainRenderer.material.SetColor("_Color", colorTerrain(terrainCube.transform.position));

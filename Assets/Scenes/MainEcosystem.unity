@@ -257,11 +257,10 @@ MonoBehaviour:
   chapterSixCreatures: []
   chapterSixCreature: {fileID: 1096138241578298797, guid: f57b4d13decf6dd46bd0acf991e1d2b2,
     type: 3}
-  chapterSixCreaturePopulation: 15
+  chapterSixCreaturePopulation: 0
   chapterSevenCreatures: []
-  chapterSevenCreature: {fileID: 1096138241578298797, guid: 5c41296cc4913eb4f8056bf228837388,
-    type: 3}
-  chapterSevenCreaturePopulation: 10
+  chapterSevenCreature: {fileID: 0}
+  chapterSevenCreaturePopulation: 0
   flockBehaviorScript: {fileID: 2118584616}
   chapterEightCreatures: []
   chapterEightCreature: {fileID: 0}
@@ -295,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainCube: {fileID: 86106462}
+  plant: {fileID: 0}
   columns: 50
   rows: 50
   thetaInput: 10
@@ -418,6 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainCube: {fileID: 86106462}
+  plant: {fileID: 0}
   columns: 50
   rows: 50
   thetaInput: 10
@@ -734,7 +735,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118584615}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97861ced9ced00941968dab0e8485159, type: 3}
   m_Name: 
