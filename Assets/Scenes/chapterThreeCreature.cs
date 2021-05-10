@@ -124,9 +124,11 @@ public class chapterThreeCreature : MonoBehaviour
 
                 if (currentOffspring <= maxOffspring)
                 {
-                    birthCount = 0;
-                    StartCoroutine(BirthCount(10f));
-
+                    if (eco.chapterThreeCreatures.Count < 30)
+                    {
+                        birthCount = 0;
+                        StartCoroutine(BirthCount(10f));
+                    }
                     state = State.Idle;
                 }
 
