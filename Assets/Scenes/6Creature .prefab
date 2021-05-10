@@ -367,6 +367,10 @@ MonoBehaviour:
   food: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
   futureLocation: {x: 0, y: 0, z: 0}
   hunger: 0
+  eco: {fileID: 0}
+  maxOffspring: 1
+  currentOffspring: 0
+  thisGameObj: {fileID: 1096138241578298797}
 --- !u!1 &1096138241862212978
 GameObject:
   m_ObjectHideFlags: 0

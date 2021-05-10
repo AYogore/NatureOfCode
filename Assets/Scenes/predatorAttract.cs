@@ -49,7 +49,8 @@ public class predatorAttract : MonoBehaviour
                             var predScipt = predator.GetComponent<ch6creature>();
                             eco.chapterSixCreatures.Remove(this.gameObject);
 
-                            predScipt.hunger += 10;
+                            predScipt.hunger += 0.5f;
+                            predScipt.stuffEaten += 1;
                             predScipt.Mate();
                             predator.tag = "predatorMate";
                             

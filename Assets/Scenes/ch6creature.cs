@@ -22,6 +22,14 @@ public class ch6creature : MonoBehaviour
 
     public float hunger;
 
+    public ecosystem eco;
+
+    private GameObject mate;
+    public int maxOffspring;
+    public int currentOffspring;
+    public GameObject thisGameObj;
+    public int stuffEaten;
+
     public enum State
     {
         Idle,
@@ -69,7 +77,9 @@ public class ch6creature : MonoBehaviour
         StartCoroutine(BehaviorSwitch(3f));
         StartCoroutine(VelocityRandomizer(3.0f));
 
-        hunger = 10f;
+        hunger = 60f;
+        eco = GameObject.Find("EcosystemController").GetComponent<ecosystem>();
+        stuffEaten = 0;
 
     }
 
@@ -82,10 +92,16 @@ public class ch6creature : MonoBehaviour
     void Update()
     {
 
-        //hunger -= Time.deltaTime;
+        hunger -= Time.deltaTime;
         if(hunger <= 0)
         {
+            eco.chapterSixCreatures.Remove(this.gameObject);
+
             Destroy(this.gameObject);
+        }
+        else if (hunger == 30)
+        {
+
         }
 
         switch (state)
@@ -98,7 +114,11 @@ public class ch6creature : MonoBehaviour
                 location += velocity * Time.deltaTime;
 
                 CheckEdges();
-
+                if(stuffEaten >= 3)
+                {
+                    stuffEaten = 0;
+                    GiveBirth();
+                }
                 this.transform.position = new Vector3(location.x, location.y, location.z);
                 break;
 
@@ -107,6 +127,26 @@ public class ch6creature : MonoBehaviour
                 this.gameObject.tag = "c1predetor";
                 break;
             case State.Return:
+                this.gameObject.tag = "predatorMate";
+
+                mate = GameObject.FindGameObjectWithTag("predatorMate");
+                Vector3 goToMate = new Vector3(mate.transform.position.x - this.transform.position.x, mate.transform.position.y - this.transform.position.y, mate.transform.position.z - this.transform.position.z);
+                velocity = goToMate;
+                velocity += acceleration * Time.deltaTime;
+                velocity = Vector3.ClampMagnitude(velocity, topSpeed);
+                location += velocity * Time.deltaTime;
+
+                CheckEdges();
+                if (currentOffspring <= maxOffspring)
+                {
+                    Mate();
+                    state = State.Idle;
+                }
+
+                else
+                {
+                    state = State.Idle;
+                }
                 break;
         }
         lookForward();
@@ -124,6 +164,11 @@ public class ch6creature : MonoBehaviour
             {
                 state = State.Hunting;
             }
+            else if (state == State.Return)
+            {
+                state = State.Return;
+            }
+
             else
             {
                 location = this.gameObject.transform.position;
@@ -151,9 +196,23 @@ public class ch6creature : MonoBehaviour
     IEnumerator MateTimer(float timer)
     {
         
+        state = State.Return;
         Debug.Log("mating");
         yield return new WaitForSeconds(timer);
-        state = State.Idle;
+    }
+
+    public void GiveBirth()
+    {
+        GameObject child = thisGameObj;
+        if(eco.chapterSixCreatures.Count < 8)
+        {
+            eco.chapterSixCreatures.Add(child);
+            Instantiate(child, this.transform.position, Quaternion.identity);
+
+            currentOffspring += 1;
+
+            state = State.Idle;
+        }
     }
 
     private void lookForward()
@@ -253,6 +312,8 @@ public class ch6creature : MonoBehaviour
     public void Mate()
     {
         state = State.Return;
+        this.gameObject.tag = "predatorMate";
+
         StartCoroutine(MateTimer(3.0f));
     }
 }
