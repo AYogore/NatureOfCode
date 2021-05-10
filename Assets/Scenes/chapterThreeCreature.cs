@@ -85,13 +85,17 @@ public class chapterThreeCreature : MonoBehaviour
         if (deathCount <= 0)
         {
             eco.chapterThreeCreatures.Remove(this.gameObject);
+            tentacles t = this.gameObject.GetComponent<tentacles>();
+            t.DestroyTentacle();
             Destroy(this.gameObject);
+
         }
         switch (state)
         {
             case State.Idle:
 
                 velocity = tempVelocity;
+                velocity.y = Random.Range(-5f, 5f) * Time.deltaTime;
                 velocity += acceleration * Time.deltaTime;
                 // Limit Velocity to the top speed
                 velocity = Vector3.ClampMagnitude(velocity, topSpeed);
