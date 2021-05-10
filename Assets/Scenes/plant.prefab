@@ -12,8 +12,12 @@ GameObject:
   - component: {fileID: 2831267679429728441}
   - component: {fileID: 2831267679429728440}
   - component: {fileID: 2831267679429728443}
+  - component: {fileID: 6801572124997531824}
+  - component: {fileID: -9184961811566943344}
+  - component: {fileID: 4946972365165249982}
+  - component: {fileID: 8223085003304607855}
   m_Layer: 0
-  m_Name: FlockPrefab
+  m_Name: plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +31,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2831267679429728437}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5524006, y: 3.9511433, z: -5.1128817}
-  m_LocalScale: {x: 0.5, y: 5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,3 +98,55 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &6801572124997531824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831267679429728437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c441b9fc592e440b9b00abe6165296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recurse: 5
+  splitNumber: 2
+--- !u!114 &-9184961811566943344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831267679429728437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ebfb7bd8924cba48b6f7de50d1d6c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4946972365165249982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831267679429728437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6a741e1bdf2844ab63c4011d281005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angle: 30
+--- !u!114 &8223085003304607855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831267679429728437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebcf417d9bf3af42af5302b06572e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scalar: 0.5

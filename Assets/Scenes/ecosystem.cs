@@ -77,6 +77,13 @@ public class ecosystem : MonoBehaviour
         }
         //flockBehaviorScript = chapterSevenCreature.GetComponent<flockBehavior>();
         chapterSevenCreatures = flockBehaviorScript.eco.chapterSevenCreatures;
+
+
+        for (int i = 0; i < chapterEightCreaturePopulation; i++) //predator
+        {
+            chapterEightCreature = Instantiate(chapterEightCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
+            chapterEightCreatures.Add(chapterEightCreature);
+        }
     }
 
     // Update is called once per frame
