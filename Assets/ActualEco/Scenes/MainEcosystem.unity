@@ -247,26 +247,26 @@ MonoBehaviour:
   chapterOneCreatures: []
   chapterOneCreature: {fileID: 1096138241578298797, guid: f57b4d13decf6dd46bd0acf991e1d2b2,
     type: 3}
-  chapterOneCreaturePopulation: 0
+  chapterOneCreaturePopulation: 20
   chapterTwoCreatures: []
   chapterTwoCreature: {fileID: 2831267679429728437, guid: 2d877fde121ec984686d45af76416df7,
     type: 3}
-  chapterTwoCreaturePopulation: 0
+  chapterTwoCreaturePopulation: 4
   chapterThreeCreatures: []
   chapterThreeCreature: {fileID: 1096138241578298797, guid: 5c41296cc4913eb4f8056bf228837388,
     type: 3}
-  chapterThreeCreaturePopulation: 0
+  chapterThreeCreaturePopulation: 15
   chapterSixCreatures: []
   chapterSixCreature: {fileID: 1096138241578298797, guid: 8aa04a02a22a1e5408319545a2e6d600,
     type: 3}
-  chapterSixCreaturePopulation: 0
+  chapterSixCreaturePopulation: 2
   chapterSevenCreatures: []
-  chapterSevenCreaturePopulation: 0
+  chapterSevenCreaturePopulation: 80
   flockBehaviorScript: {fileID: 2118584616}
   chapterEightCreatures: []
-  chapterEightCreature: {fileID: 2831267679429728437, guid: 8de0e32c318c11d4499fce8cc02af867,
+  chapterEightCreature: {fileID: 4505859711770168080, guid: 4bfc45eed5de40d458271757e69b3745,
     type: 3}
-  chapterEightCreaturePopulation: 2
+  chapterEightCreaturePopulation: 12
   terrainMin: 10
   terrain: {fileID: 671680341}
 --- !u!4 &671680340

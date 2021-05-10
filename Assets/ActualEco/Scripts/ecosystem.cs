@@ -81,7 +81,7 @@ public class ecosystem : MonoBehaviour
 
         for (int i = 0; i < chapterEightCreaturePopulation; i++) //predator
         {
-            chapterEightCreature = Instantiate(chapterEightCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 10f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
+            chapterEightCreature = Instantiate(chapterEightCreature, new Vector3(Random.Range(terrainMin, terrain.columns), Random.Range(4f, 7f), Random.Range(terrainMin, terrain.rows)), Quaternion.identity);
             chapterEightCreatures.Add(chapterEightCreature);
         }
     }

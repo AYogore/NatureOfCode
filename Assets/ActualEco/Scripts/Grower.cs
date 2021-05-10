@@ -6,6 +6,6 @@ public class Grower : MonoBehaviour
 {
     public void Made(int index)
     {
-        this.transform.position += this.transform.up * this.transform.localScale.y;
+        this.transform.position += this.transform.up * this.transform.localScale.y * 4;
     }
 }
